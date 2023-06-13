@@ -1,13 +1,10 @@
-// Not Complete
-
 fn quick_sort<T: Ord + Copy>(arr: &mut [T]) {
     divide(arr, 0, arr.len() - 1);
 }
 
 fn divide<T: Ord + Copy>(arr: &mut [T], first: usize, last: usize) {
-    println!("dividing: {}, {}", first, last);
     const MIN_SIZE: usize = 5;
-    if first + last + 1 < MIN_SIZE {
+    if last - first + 1 < MIN_SIZE {
         insertion_sort(arr);
     } else {
         let pivot_index = partition(arr, first, last);
@@ -17,7 +14,6 @@ fn divide<T: Ord + Copy>(arr: &mut [T], first: usize, last: usize) {
 }
 
 fn partition<T: Ord + Copy>(arr: &mut [T], first: usize, last: usize) -> usize {
-    println!("partition: {}, {}", first, last);
     let mid: usize = (first + last) / 2;
     sort_first_middle_last(arr, first, mid, last);
 
@@ -30,7 +26,6 @@ fn partition<T: Ord + Copy>(arr: &mut [T], first: usize, last: usize) -> usize {
     let mut done = false;
 
     while !done {
-        println!("STARTing done while loop");
         while arr[left_index] < pivot_value {left_index += 1;}
         while arr[right_index] > pivot_value {right_index -= 1;}
         if left_index < right_index {
@@ -38,7 +33,6 @@ fn partition<T: Ord + Copy>(arr: &mut [T], first: usize, last: usize) -> usize {
             left_index += 1;
             right_index -= 1;
         } else {
-            println!("ENDing done while loop");
             done = true;
         }
     }
@@ -48,7 +42,6 @@ fn partition<T: Ord + Copy>(arr: &mut [T], first: usize, last: usize) -> usize {
 }
 
 fn sort_first_middle_last<T: Ord>(arr: &mut [T], first: usize, mid: usize, last: usize) {
-    println!("sorting_f_m_l: {}, {}", first, last);
     if arr[first] > arr[mid] {arr.swap(first, mid);}
     if arr[mid] > arr[last] {arr.swap(mid, last);}
     if arr[first] > arr[mid] {arr.swap(first, mid);}
